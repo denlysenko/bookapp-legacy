@@ -1,0 +1,16 @@
+<section class="row history">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th data-ng-click="sort('date')">Date</th>
+				<th data-ng-click="sort('action')">Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr data-ng-repeat="item in history | orderBy:predicate:reverse">
+				<td>{{item.date | date}}</td>
+				<td>{{item.action}}</td>
+			</tr>
+		</tbody>
+	</table>
+</section>

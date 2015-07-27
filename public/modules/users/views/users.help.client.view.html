@@ -1,0 +1,28 @@
+<section class="row support">
+	<div class="col-md-6">
+		<h4>Please, send your question</h4>
+		<form data-ng-submit="ask()" novalidate>
+			<div class="form-group">
+				<input type="text" name="user" data-ng-model="authentication.user.displayName" class="form-control" required>
+			</div>
+			<div class="form-group">	
+				<textarea name="message" id="message" rows="10" class="form-control" placeholder="Type Your Message" required data-ng-model="question"></textarea>
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">Ask Question</button>
+			</div>
+		</form>
+	</div>
+<div class="col-md-6">
+	<h4>Dialog</h4>
+	<div class="well">
+		<blockquote data-ng-repeat="question in questions | orderBy:$index:reverse track by $index">
+			{{question.question}}
+			<br>
+			<cite>
+				- {{question.from}}
+			</cite>
+		</blockquote>
+	</div>
+</div>
+</section>

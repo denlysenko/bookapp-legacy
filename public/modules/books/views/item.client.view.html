@@ -1,0 +1,16 @@
+<div class="item">
+	<div class="cover">
+		<a data-ng-hide="title === 'Browse Books To Buy'" href="/#/book/browse/{{book.url}}"><img data-ng-src="{{book.cover}}" alt="{{book.title}}"></a>
+		<a data-ng-show="title === 'Browse Books To Buy'" href="/#/book/buy/{{book.url}}"><img data-ng-src="{{book.cover}}" alt="{{book.title}}"></a>
+
+	</div>
+	<a data-ng-hide="title === 'Browse Books To Buy'" href="/#/book/browse/{{book.url}}">
+		<span class="title" data-ng-bind="book.title"></span>
+	</a>	
+	<a data-ng-show="title === 'Browse Books To Buy'" href="/#/book/buy/{{book.url}}">
+		<span class="title" data-ng-bind="book.title"></span>
+	</a>	
+	<span class="author">by {{book.author}}</span>
+	<div data-ng-show="book.price">{{book.price}} $</div>
+	<rating data-ng-model="book.rating" data-on-hover="hoveringOver(value)" data-on-leave="overStar = null" state-on="'fa fa-star'" state-off="'fa fa-star-o'" class="rate" data-ng-click="sendRate()"></rating>
+</div>

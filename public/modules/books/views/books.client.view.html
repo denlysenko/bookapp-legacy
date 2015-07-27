@@ -1,0 +1,23 @@
+<section class="row">
+	<div class="content-nav">
+		<h2 data-ng-bind="title"></h2>
+		<div class="row">
+			<div class="filter col-md-6">
+				<input type="radio" name="filter" value="title" data-ng-model="mainFilter" id="all">
+				<label for="all">All books</label>
+				<input type="radio" name="filter" value="-added" data-ng-model="mainFilter" id="recent">
+				<label for="recent">Most recent</label>
+				<input type="radio" name="filter" value="-views" data-ng-model="mainFilter" id="popular">
+				<label for="popular">Most popular</label>
+			</div>
+			<div id="search" class="col-md-6 clearfix">
+				<input type="text" placeholder="Enter Keywords" data-ng-model="search.title" class="form-control">
+				<button class="disabled"><i class="fa fa-search"></i></button>
+			</div>
+		</div>
+	</div>
+	<div class="goods row" data-ng-controller="BookListController">
+		<div data-ng-repeat="book in books | orderBy:mainFilter | filter:search" data-book-item="book" class="col-md-3 col-sm-6"></div>
+		
+	</div>
+</section>
