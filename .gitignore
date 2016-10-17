@@ -1,0 +1,4 @@
+.idea/
+server/node_modules
+/server/src/config/local.env.js
+/server/coverage
