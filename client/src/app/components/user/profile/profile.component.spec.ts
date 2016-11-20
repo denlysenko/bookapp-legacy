@@ -9,6 +9,7 @@ import { ResponseOptions, Response } from "@angular/http";
 import { ProfileComponent } from "./profile.component";
 import { User } from "../../../models/User";
 import { HistoryService } from "../../../services/history.service";
+import { APP_CONFIG, AppConfig } from "../../../app.config";
 
 describe('Profile Component', () => {
   let profileComponent: ProfileComponent;
@@ -50,6 +51,10 @@ describe('Profile Component', () => {
               });
             })
           }
+        },
+        {
+          provide: APP_CONFIG,
+          useValue: AppConfig
         }
       ]
     });

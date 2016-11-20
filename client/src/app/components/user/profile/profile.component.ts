@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, animate, style, transition, state, trigger } from "@angular/core";
+import { Component, OnInit, OnDestroy, animate, style, transition, state, trigger, Inject } from "@angular/core";
 import { User } from "../../../models/User";
 import { UserService } from "../../../services/user.service";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
@@ -6,6 +6,8 @@ import { ValidatorHelper } from "../../../helpers/validator.helper";
 import * as ErrorHandler from '../../../helpers/errorHandler';
 import { Subscription } from "rxjs";
 import { HistoryService } from "../../../services/history.service";
+import { APP_CONFIG } from "../../../app.config";
+import { IAppConfig } from "../../../models/AppConfig";
 
 @Component({
   templateUrl: 'profile.component.html',
@@ -42,7 +44,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   constructor(
     private _userService: UserService,
     private _fb: FormBuilder,
-    private _historyService: HistoryService
+    private _historyService: HistoryService,
+    @Inject(APP_CONFIG) private config: IAppConfig
   ) {}
 
   onFileChange(event) {
@@ -105,7 +108,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
           this.profileForm.controls['firstName'].setValue(this.user.firstName);
           this.profileForm.controls['lastName'].setValue(this.user.lastName);
           this.profileForm.controls['email'].setValue(this.user.email);
-          this.avatarUrl = this.user.avatarUrl;
+          this.avatarUrl = `${this.config.baseUrl}${this.user.avatarUrl}`;
         }
       });
   }
