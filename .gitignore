@@ -36,3 +36,6 @@ server/node_modules
 #System Files
 /client/.DS_Store
 /client/Thumbs.db
+/client/node_modules/
+/client/dist/
+/server/dist/
