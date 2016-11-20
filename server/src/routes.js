@@ -6,11 +6,18 @@
 
 import errors from './components/errors';
 import path from 'path';
+import cors from 'cors';
 
 export default function(app) {
+  app.use(cors());
   // Insert routes below
-  app.use('/api/things', require('./api/thing'));
   app.use('/api/users', require('./api/user'));
+  app.use('/api/books', require('./api/book'));
+  app.use('/api/comments', require('./api/comment'));
+  app.use('/api/wishlist', require('./api/wishlist'));
+  app.use('/api/favourite', require('./api/favourite'));
+  app.use('/api/mustread', require('./api/mustread'));
+  app.use('/api/history', require('./api/history'));
 
   app.use('/auth', require('./auth').default);
 

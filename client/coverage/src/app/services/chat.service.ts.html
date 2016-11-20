@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/app/services/chat.service.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">all files</a> / <a href="index.html">src/app/services/</a> chat.service.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">42.86% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>18/42</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">5.88% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/17</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">42.5% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>17/40</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Injectable, Inject } from "@angular/core";
+import * as io from 'socket.io-client';
+import { Observable, BehaviorSubject } from "rxjs";
+import { APP_CONFIG } from "../app.config";
+import { IAppConfig } from "../models/AppConfig";
+&nbsp;
+@Injectable()
+export class ChatService {
+  private socket: any;
+<span class="cstat-no" title="statement not covered" >  questions: any[] = [];</span>
+<span class="cstat-no" title="statement not covered" >  answers: any[] = [];</span>
+<span class="cstat-no" title="statement not covered" >  questionsStream = new BehaviorSubject&lt;any&gt;(null);</span>
+<span class="cstat-no" title="statement not covered" >  answersStream = new BehaviorSubject&lt;any&gt;(null);</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >  constructor(@Inject(APP_CONFIG) private <span class="cstat-no" title="statement not covered" >config: IAppConfig)</span></span> {
+<span class="cstat-no" title="statement not covered" >    this.socket = io(`${this.config.baseUrl}:8000`, {'transports': ['websocket', 'polling']});</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  getQuestions() {</span>
+<span class="cstat-no" title="statement not covered" >    this.socket.on('question', <span class="fstat-no" title="function not covered" >(data: any)</span> =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      this.questions.push(data);</span>
+<span class="cstat-no" title="statement not covered" >      this.questionsStream.next(this.questions);</span>
+    });
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  getAnswers() {</span>
+<span class="cstat-no" title="statement not covered" >    this.socket.on('answer', <span class="fstat-no" title="function not covered" >(data: any)</span> =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      this.answers.push(data);</span>
+<span class="cstat-no" title="statement not covered" >      this.answersStream.next(this.answers);</span>
+    });
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  getAdminConnection() {</span>
+<span class="cstat-no" title="statement not covered" >    return Observable.create(<span class="fstat-no" title="function not covered" >observer </span>=&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      this.socket.on('connect:admin', <span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >        observer.next('connected');</span>
+      });
+<span class="cstat-no" title="statement not covered" >      this.socket.on('disconnect:admin', <span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >        observer.next('disconnected');</span>
+      });
+    });
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  checkAdminConnection() {</span>
+<span class="cstat-no" title="statement not covered" >    return Observable.create(<span class="fstat-no" title="function not covered" >observer </span>=&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      this.socket.on('check:admin', <span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >        observer.next('checking');</span>
+      });
+    });
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  sendQuestion(message: string, username: string)</span> {
+<span class="cstat-no" title="statement not covered" >    this.socket.emit('question', message, username, this.socket.id);</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  sendAnswer(message: string, username: string, socketId: string)</span> {
+<span class="cstat-no" title="statement not covered" >    this.socket.emit('answer', message, username, socketId);</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  connectAdmin() {</span>
+<span class="cstat-no" title="statement not covered" >    this.socket.emit('online');</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  disconnectAdmin() {</span>
+<span class="cstat-no" title="statement not covered" >    this.socket.emit('offline');</span>
+  }
+}
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sun Nov 20 2016 14:50:39 GMT+0200 (EET)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

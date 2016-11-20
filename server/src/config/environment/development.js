@@ -7,7 +7,7 @@ module.exports = {
 
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://localhost/server-dev'
+    uri: 'mongodb://localhost/bookapp-dev'
   },
 
   // Seed database on startup

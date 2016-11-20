@@ -199,6 +199,19 @@ gulp.task('start:src:debug', () => {
     .on('log', onServerLog);
 });
 
+gulp.task('default', cb => {
+  runSequence(
+    [
+      'lint:scripts',
+      'env:all',
+    ],
+    'test',
+    ['start:src'],
+    'watch',
+    cb
+  );
+});
+
 gulp.task('watch', () => {
   var testFiles = _.union(/*paths.client.test,*/ paths.server.test.unit, paths.server.test.integration);
 
@@ -302,10 +315,19 @@ gulp.task('coverage:integration', () => {
   // Creating the reports after tests ran
 });
 
+gulp.task('clean:dist', () => del([`${paths.dist}/!(.git*|.openshift|Procfile)**`], {dot: true}));
+
 /********************
  * Build
  ********************/
-
+gulp.task('build', cb => {
+  runSequence(
+    [
+      'clean:dist'
+    ],
+    'transpile:src',
+    cb);
+});
 /**
  * turns 'boostrap/fonts/font.woff' into 'boostrap/font.woff'
  */

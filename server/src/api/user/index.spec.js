@@ -3,12 +3,13 @@
 var proxyquire = require('proxyquire').noPreserveCache();
 
 var userCtrlStub = {
-  index: 'userCtrl.index',
-  destroy: 'userCtrl.destroy',
   me: 'userCtrl.me',
   changePassword: 'userCtrl.changePassword',
-  show: 'userCtrl.show',
-  create: 'userCtrl.create'
+  changeAvatar: 'userCtrl.changeAvatar',
+  create: 'userCtrl.create',
+  update: 'userCtrl.update',
+  forgot: 'userCtrl.forgot',
+  reset: 'userCtrl.reset'
 };
 
 var authServiceStub = {
@@ -43,22 +44,6 @@ describe('User API Router:', function() {
     userIndex.should.equal(routerStub);
   });
 
-  describe('GET /api/users', function() {
-    it('should verify admin role and route to user.controller.index', function() {
-      routerStub.get
-        .withArgs('/', 'authService.hasRole.admin', 'userCtrl.index')
-        .should.have.been.calledOnce;
-    });
-  });
-
-  describe('DELETE /api/users/:id', function() {
-    it('should verify admin role and route to user.controller.destroy', function() {
-      routerStub.delete
-        .withArgs('/:id', 'authService.hasRole.admin', 'userCtrl.destroy')
-        .should.have.been.calledOnce;
-    });
-  });
-
   describe('GET /api/users/me', function() {
     it('should be authenticated and route to user.controller.me', function() {
       routerStub.get
@@ -75,18 +60,42 @@ describe('User API Router:', function() {
     });
   });
 
-  describe('GET /api/users/:id', function() {
-    it('should be authenticated and route to user.controller.show', function() {
-      routerStub.get
-        .withArgs('/:id', 'authService.isAuthenticated', 'userCtrl.show')
-        .should.have.been.calledOnce;
-    });
-  });
-
   describe('POST /api/users', function() {
     it('should route to user.controller.create', function() {
       routerStub.post
         .withArgs('/', 'userCtrl.create')
+        .should.have.been.calledOnce;
+    });
+  });
+
+  describe('PUT /api/users', function() {
+    it('should route to user.controller.update', function() {
+      routerStub.put
+        .withArgs('/:id', 'authService.isAuthenticated', 'userCtrl.update')
+        .should.have.been.calledOnce;
+    });
+  });
+
+  describe('PUT /api/users/:id/avatar', function() {
+    it('should be authenticated and route to user.controller.changePassword', function() {
+      routerStub.put
+        .withArgs('/:id/avatar', 'authService.isAuthenticated', 'userCtrl.changeAvatar')
+        .should.have.been.calledOnce;
+    });
+  });
+
+  describe('POST /api/users/forgot', function() {
+    it('should route to user.controller.forgot', function() {
+      routerStub.post
+        .withArgs('/forgot', 'userCtrl.forgot')
+        .should.have.been.calledOnce;
+    });
+  });
+
+  describe('POST /api/users/reset', function() {
+    it('should route to user.controller.reset', function() {
+      routerStub.post
+        .withArgs('/reset/:token', 'userCtrl.reset')
         .should.have.been.calledOnce;
     });
   });

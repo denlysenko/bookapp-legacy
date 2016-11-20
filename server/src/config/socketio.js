@@ -9,14 +9,14 @@
 function onDisconnect(/*socket*/) {}
 
 // When the user connects.. perform this
-function onConnect(socket) {
+function onConnect(socket, io) {
   // When the client emits 'info', this listens and executes
   socket.on('info', data => {
     socket.log(JSON.stringify(data, null, 2));
   });
 
   // Insert sockets below
-  require('../api/thing/thing.socket').register(socket);
+  require('../components/chat').register(socket, io);
 }
 
 export default function(socketio) {
@@ -44,14 +44,18 @@ export default function(socketio) {
       console.log(`SocketIO ${socket.nsp.name} [${socket.address}]`, ...data);
     };
 
+    // when connecting, check if there is admin online
+    socketio.emit('check:admin');
+
     // Call onDisconnect.
     socket.on('disconnect', () => {
-      onDisconnect(socket);
+      // when disconnecting, check if there is admin online
+      socketio.emit('check:admin');
       socket.log('DISCONNECTED');
     });
 
     // Call onConnect.
-    onConnect(socket);
+    onConnect(socket, socketio);
     socket.log('CONNECTED');
   });
 }

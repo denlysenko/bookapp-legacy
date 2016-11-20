@@ -6,7 +6,8 @@ var user;
 var genUser = function() {
   user = new User({
     provider: 'local',
-    name: 'Fake User',
+    firstName: 'User',
+    lastName: 'Fake',
     email: 'test@example.com',
     password: 'password'
   });
@@ -40,19 +41,34 @@ describe('User Model', function() {
       }).should.be.rejected;
   });
 
+  it('should fail when firstName was not provided', function() {
+    user.firstName = '';
+    return user.save().should.be.rejected;
+  });
+
+  it('should fail when lastName was not provided', function() {
+    user.lastName = '';
+    return user.save().should.be.rejected;
+  });
+
+  it('should saved with "user" role', function() {
+    return user.save()
+      .then(() => {
+        return User.find({}).exec();
+      })
+      .then(user => {
+        user[0].roles.should.contain('user');
+      });
+  });
+
   describe('#email', function() {
     it('should fail when saving with a blank email', function() {
       user.email = '';
       return user.save().should.be.rejected;
     });
 
-    it('should fail when saving with a null email', function() {
-      user.email = null;
-      return user.save().should.be.rejected;
-    });
-
-    it('should fail when saving without an email', function() {
-      user.email = undefined;
+    it('should fail when saving with an invalid email', function() {
+      user.email = 'email';
       return user.save().should.be.rejected;
     });
   });
@@ -63,13 +79,8 @@ describe('User Model', function() {
       return user.save().should.be.rejected;
     });
 
-    it('should fail when saving with a null password', function() {
-      user.password = null;
-      return user.save().should.be.rejected;
-    });
-
-    it('should fail when saving without a password', function() {
-      user.password = undefined;
+    it('should fail when saving with password less than 6 chars', function() {
+      user.password = 'pass';
       return user.save().should.be.rejected;
     });
 
@@ -87,7 +98,7 @@ describe('User Model', function() {
       });
 
       it('should remain the same hash unless the password is updated', function() {
-        user.name = 'Test User';
+        user.lastName = 'Test';
         return user.save()
           .then(function(u) {
             return u.authenticate('password');

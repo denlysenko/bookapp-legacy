@@ -4,66 +4,93 @@ import crypto from 'crypto';
 mongoose.Promise = require('bluebird');
 import mongoose, {Schema} from 'mongoose';
 
-var UserSchema = new Schema({
-  name: String,
+/**
+* A Validation function for local strategy properties
+*/
+const validateLocalStrategyProperty = function(property) {
+  return ((this.provider !== 'local' && !this.updated) || property.length);
+};
+
+/**
+ * A Validation function for local strategy password
+ */
+const validateLocalStrategyPassword = function(password) {
+  return (this.provider !== 'local' || (password && password.length > 6));
+};
+
+let UserSchema = new Schema({
+  firstName: {
+    type: String,
+    trim: true,
+    default: '',
+    validate: [validateLocalStrategyProperty, 'Please, fill in your First Name']
+  },
+  lastName: {
+    type: String,
+    trim: true,
+    default: '',
+    validate: [validateLocalStrategyProperty, 'Please, fill in your Last Name']
+  },
+  displayName: {
+    type: String,
+    trim: true
+  },
   email: {
     type: String,
-    lowercase: true,
-    required: true
-  },
-  role: {
-    type: String,
-    default: 'user'
+    trim: true,
+    validate: [validateLocalStrategyProperty, 'Please fill in your Email'],
+    match: [/.+\@.+\..+/, 'Please fill a valid email address']
   },
   password: {
     type: String,
-    required: true
+    default: '',
+    validate: [validateLocalStrategyPassword, 'Password should contain at least 6 characters']
   },
+  salt: String,
   provider: String,
-  salt: String
+  avatarUrl: {
+    type: String,
+    default: '/fs/avatars/default-avatar.png'
+  },
+  roles: {
+    type: [{ type: String, enum: [ 'user', 'admin' ] }],
+    default: [ 'user' ]
+  },
+  updated: Date,
+  created: {
+    type: Date,
+    default: Date.now
+  },
+  reading: {
+    epubUrl: {
+      type: String,
+      default: ''
+    },
+    bookmark: {
+      type: String,
+      default: ''
+    }
+  },
+  resetPasswordToken: String,
+  resetPasswordExpires: Date
 });
 
 /**
  * Virtuals
  */
 
-// Public profile information
-UserSchema
-  .virtual('profile')
-  .get(function() {
-    return {
-      name: this.name,
-      role: this.role
-    };
-  });
-
 // Non-sensitive info we'll be putting in the token
 UserSchema
   .virtual('token')
   .get(function() {
     return {
-      _id: this._id,
-      role: this.role
+      _id: this._id
     };
   });
 
 /**
  * Validations
  */
-
-// Validate empty email
-UserSchema
-  .path('email')
-  .validate(function(email) {
-    return email.length;
-  }, 'Email cannot be blank');
-
-// Validate empty password
-UserSchema
-  .path('password')
-  .validate(function(password) {
-    return password.length;
-  }, 'Password cannot be blank');
 
 // Validate email is not taken
 UserSchema
@@ -84,10 +111,6 @@ UserSchema
       });
   }, 'The specified email address is already in use.');
 
-var validatePresenceOf = function(value) {
-  return value && value.length;
-};
-
 /**
  * Pre-save hook
  */
@@ -96,10 +119,6 @@ UserSchema
     // Handle new/update passwords
     if(!this.isModified('password')) {
       return next();
-    }
-
-    if(!validatePresenceOf(this.password)) {
-      return next(new Error('Invalid password'));
     }
 
     // Make salt with a callback
@@ -203,11 +222,11 @@ UserSchema.methods = {
     var salt = new Buffer(this.salt, 'base64');
 
     if(!callback) {
-      return crypto.pbkdf2Sync(password, salt, defaultIterations, defaultKeyLength)
+      return crypto.pbkdf2Sync(password, salt, defaultIterations, defaultKeyLength, 'sha512')
         .toString('base64');
     }
 
-    return crypto.pbkdf2(password, salt, defaultIterations, defaultKeyLength, (err, key) => {
+    return crypto.pbkdf2(password, salt, defaultIterations, defaultKeyLength, 'sha512', (err, key) => {
       if(err) {
         return callback(err);
       } else {

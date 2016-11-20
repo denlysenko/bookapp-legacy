@@ -19,6 +19,7 @@ import passport from 'passport';
 import session from 'express-session';
 import connectMongo from 'connect-mongo';
 import mongoose from 'mongoose';
+import multer from 'multer';
 var MongoStore = connectMongo(session);
 
 export default function(app) {
@@ -32,8 +33,8 @@ export default function(app) {
     app.use(favicon(path.join(config.root, 'client', 'favicon.ico')));
   }
 
-  app.set('appPath', path.join(config.root, 'client'));
-  app.use(express.static(app.get('appPath')));
+  app.set('appPath', path.join(config.root, 'fs'));
+  app.use('/fs', express.static(app.get('appPath')));
   app.use(morgan('dev'));
 
   app.set('views', `${config.root}/server/views`);
@@ -45,6 +46,7 @@ export default function(app) {
   app.use(methodOverride());
   app.use(cookieParser());
   app.use(passport.initialize());
+  app.use(multer({ dest: path.resolve('./uploads/') }));
 
 
   // Persist sessions with MongoStore / sequelizeStore
