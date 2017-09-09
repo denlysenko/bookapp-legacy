@@ -1,16 +1,23 @@
 @media(min-width: 992px) {
-  html, body, .content {
-    height: 95%;
+  html, body {
+    height: 100%;
   }
 
   .container, main, aside, .home {
     height: 100%;
   }
 
+  .content {
+    height: calc(100% - 112px);
+  }
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
-  margin: 5px auto;
+  padding: 5px 0;
   font-family: 'proxima_nova_rgregular';
   background: #123972; /**ie**/
   background: -webkit-radial-gradient(#c0c1f6 5%, #7076c3 50%, #0d366e);
