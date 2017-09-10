@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { BsDropdownModule, RatingModule } from "ngx-bootstrap";
 // import { AuthGuard } from "./guards/auth.guard";
 // import { RoleGuard } from "./guards/role.guard";
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
@@ -15,17 +14,17 @@ import { environment } from '../environments/environment';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './app.routes';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     CoreModule,
-    BsDropdownModule.forRoot(),
-    RatingModule.forRoot(),
     ToastModule,
     RouterModule.forRoot(appRoutes),
     StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([]),
     StoreRouterConnectingModule,
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],

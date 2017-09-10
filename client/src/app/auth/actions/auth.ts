@@ -1,26 +1,24 @@
 import { Action } from '@ngrx/store';
-import { Credentials } from '../models/Credentials';
 import { User } from '../models/User';
 
-export const LOGIN = '[Auth] Login';
-export const LOGIN_SUCCESS = '[Auth] Login Success';
-export const LOGIN_FAILURE = '[Auth] Login Failure';
+export const LOAD_LOGGED_USER = '[Auth] Load Logged User';
+export const LOAD_LOGGED_USER_SUCCESS = '[Auth] Load Logged User Success';
+export const LOAD_LOGGED_USER_FAILURE = '[Auth] Load Logged User Failure';
 export const LOGOUT = '[Auth] Logout';
+export const LOGOUT_SUCCESS = '[Auth] Logout Success';
 
-export class Login implements Action {
-  readonly type = LOGIN;
-
-  constructor(public payload: Credentials) { }
+export class LoadLoggedUser implements Action {
+  readonly type = LOAD_LOGGED_USER;
 }
 
-export class LoginSuccess implements Action {
-  readonly type = LOGIN_SUCCESS;
+export class LoadLoggedUserSuccess implements Action {
+  readonly type = LOAD_LOGGED_USER_SUCCESS;
 
   constructor(public payload: User) { }
 }
 
-export class LoginFailure implements Action {
-  readonly type = LOGIN_FAILURE;
+export class LoadLoggedUserFailure implements Action {
+  readonly type = LOAD_LOGGED_USER_FAILURE;
 
   constructor(public payload: string) { }
 }
@@ -29,9 +27,14 @@ export class Logout implements Action {
   readonly type = LOGOUT;
 }
 
+export class LogoutSuccess implements Action {
+  readonly type = LOGOUT_SUCCESS;
+}
+
 export type Actions =
-  Login |
-  LoginSuccess |
-  LoginFailure |
-  Logout;
+  LoadLoggedUser |
+  LoadLoggedUserSuccess |
+  LoadLoggedUserFailure |
+  Logout |
+  LogoutSuccess;
 

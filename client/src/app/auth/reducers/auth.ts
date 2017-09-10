@@ -1,27 +1,26 @@
 import { User } from '../models/User';
 import * as fromAuth from '../actions/auth';
-import { LOGIN_SUCCESS, LOGOUT } from '../actions/auth';
 
 export interface State {
-  loggedIn: boolean;
   user: User | null;
+  loggedIn: boolean;
 }
 
 export const initialState: State = {
-  loggedIn: false,
-  user: null
+  user: null,
+  loggedIn: false
 };
 
 export function reducer(state = initialState, action: fromAuth.Actions): State {
   switch (action.type) {
-    case LOGIN_SUCCESS:
+    case fromAuth.LOAD_LOGGED_USER_SUCCESS:
       return {
         ...state,
         loggedIn: true,
         user: action.payload
       };
 
-    case LOGOUT:
+    case fromAuth.LOGOUT_SUCCESS:
       return initialState;
 
     default:
@@ -29,5 +28,5 @@ export function reducer(state = initialState, action: fromAuth.Actions): State {
   }
 }
 
-export const getLoggedIn = (state: State) => state.loggedIn;
 export const getUser = (state: State) => state.user;
+export const getLoggedIn = (state: State) => state.loggedIn;

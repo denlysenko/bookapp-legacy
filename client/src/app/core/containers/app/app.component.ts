@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
-import * as fromAuth from '../../../auth/reducers/auth';
+import * as fromAuth from '../../../auth/reducers';
 import { User } from '../../../auth/models/User';
 import { Logout } from '../../../auth/actions/auth';
 
@@ -16,6 +16,7 @@ export class AppComponent {
 
   constructor(private store: Store<fromAuth.State>) {
     this.isLoggedIn$ = store.select(fromAuth.getLoggedIn);
+    this.user$ = store.select(fromAuth.getUser);
   }
 
   signout() {

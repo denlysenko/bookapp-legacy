@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
-import * as fromAuth from '../../../auth/reducers/auth';
+import * as fromAuth from '../../../auth/reducers';
 import { routeAnimation } from '../../../animations/route-animation';
 
 const TITLE = 'Book Application';

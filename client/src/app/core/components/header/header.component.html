@@ -22,6 +22,7 @@
           <a *ngIf="user"
              href=""
              class="dropdown-toggle"
+             (click)="false"
              dropdownToggle>
             <img [src]="config.baseUrl + '' + user.avatarUrl"
                  alt="avatar">
