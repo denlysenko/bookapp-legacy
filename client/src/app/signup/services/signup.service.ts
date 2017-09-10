@@ -1,25 +1,26 @@
 import { Inject, Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { APP_CONFIG } from '../../config/app.config';
 import { AppConfig } from '../../config/AppConfig';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Credentials } from '../../auth/models/Credentials';
+import { User } from '../../auth/models/User';
 import { Observable } from 'rxjs/Observable';
+import { SignupResponse } from '../models/SignupResponse';
 import 'rxjs/add/observable/throw';
-import { LoginResponse } from '../models/LoginResponse';
 import * as errorHandler from '../../helpers/errorHandler';
 
 @Injectable()
-export class LoginService {
+export class SignupService {
+
   constructor(
-    @Inject(APP_CONFIG) private config: AppConfig,
-    private http: HttpClient
+    private http: HttpClient,
+    @Inject(APP_CONFIG) private config: AppConfig
   ) { }
 
-  login(creds: Credentials): Observable<string> {
+  signup(user: User): Observable<string> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
 
-    return this.http.post<LoginResponse>(`${this.config.baseUrl}/auth/local`, creds, { headers })
+    return this.http.post<SignupResponse>(`${this.config.baseUrl}/api/users`, user, { headers })
       .map(res => res.token)
       .catch(err => Observable.throw(errorHandler.handleError(err.error)));
   }

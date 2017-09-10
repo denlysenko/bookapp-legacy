@@ -5,7 +5,6 @@ import * as fromLogin from '../actions/login';
 import * as fromAuth from '../../auth/actions/auth';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/mergeMap';
 import { Router } from '@angular/router';
 
 @Injectable()

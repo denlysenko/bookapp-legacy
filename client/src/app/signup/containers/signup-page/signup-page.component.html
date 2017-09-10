@@ -1,0 +1,10 @@
+<section class="row">
+  <h3 class="col-md-12 text-center">Sign up to start using</h3>
+  <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4">
+    <ba-alert *ngIf="error$ | async"
+              [text]="error$ | async"
+              [type]="'danger'"></ba-alert>
+    <ba-signup-form [isSubmitting]="submitting$ | async"
+                    (formSubmitted)="onFormSubmitted($event)"></ba-signup-form>
+  </div>
+</section>
