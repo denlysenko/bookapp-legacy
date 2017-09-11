@@ -148,6 +148,10 @@ export const appRoutes: Routes = [
   {
     path: 'profile',
     loadChildren: './profile/profile.module#ProfileModule'
+  },
+  {
+    path: 'password-change',
+    loadChildren: './change-password/change-password.module#ChangePasswordModule'
   }
 ];
 
