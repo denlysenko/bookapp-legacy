@@ -5,9 +5,10 @@
               [text]="error$ | async"
               [type]="'danger'"></ba-alert>
     <ba-alert *ngIf="success$ | async"
-              [text]="'Profile changed successfuly'"
+              [text]="'Profile changed successfully'"
               [type]="'success'"></ba-alert>
     <ba-profile-form [user]="user$ | async"
-                     [isSumbitting]="submitting$ | async"></ba-profile-form>
+                     [isSubmitting]="submitting$ | async"
+                     (formSubmitted)="onFormSubmit($event)"></ba-profile-form>
   </div>
 </section>

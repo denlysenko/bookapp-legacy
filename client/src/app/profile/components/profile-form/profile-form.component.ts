@@ -2,9 +2,11 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  EventEmitter,
   Inject,
   Input,
   OnChanges,
+  Output,
   SimpleChanges
 } from '@angular/core';
 import { User } from '../../../auth/models/User';
@@ -12,6 +14,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ValidatorHelper } from '../../../helpers/validator.helper';
 import { APP_CONFIG } from '../../../config/app.config';
 import { AppConfig } from '../../../config/AppConfig';
+import { SaveProfilePayload } from '../../actions/profile';
 
 const USER_CHANGES = 'user';
 
@@ -27,7 +30,9 @@ export class ProfileFormComponent implements OnChanges {
   avatar: File;
 
   @Input() user: User;
-  @Input() isSumbitting: boolean;
+  @Input() isSubmitting: boolean;
+
+  @Output() formSubmitted = new EventEmitter<SaveProfilePayload>();
 
   constructor(
     private fb: FormBuilder,
@@ -48,6 +53,18 @@ export class ProfileFormComponent implements OnChanges {
     }
   }
 
+  saveChanges() {
+    if (this.profileForm.valid) {
+      this.formSubmitted.emit({
+        id: this.user._id,
+        user: this.profileForm.value,
+        avatar: this.avatar
+      });
+
+      this.profileForm.markAsPristine();
+    }
+  }
+
   private readURL(file) {
     const reader = new FileReader();
     reader.onload = (e: any) => {
@@ -60,7 +77,7 @@ export class ProfileFormComponent implements OnChanges {
 
   private initForm() {
     this.profileForm = this.fb.group({
-      firstName: [this.user.firstName, Validators.required],
+      firstName: [this.user.firstName, /*Validators.required*/],
       lastName: [this.user.lastName, Validators.required],
       email: [this.user.email, Validators.compose([
         Validators.required,

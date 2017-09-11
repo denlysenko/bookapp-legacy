@@ -17,7 +17,9 @@ export function reducer(state = initialState, action: fromProfile.Actions) {
     case fromProfile.SAVE_PROFILE:
       return {
         ...state,
-        submitting: true
+        submitting: true,
+        error: null,
+        success: false
       };
 
     case fromProfile.SAVE_PROFILE_SUCCESS:

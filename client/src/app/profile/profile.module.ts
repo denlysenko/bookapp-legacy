@@ -7,7 +7,11 @@ import { RouterModule } from '@angular/router';
 import { profileRoutes } from './profileRoutes';
 import { SharedModule } from '../shared/shared.module';
 import { StoreModule } from '@ngrx/store';
-import { reducers } from './reducers/index';
+import { reducers } from './reducers';
+import { ProfileService } from './services/profile.service';
+import { EffectsModule } from '@ngrx/effects';
+import { ProfileEffects } from './effects/profile.effects';
+import { FileUploadService } from '../services/fileUpload.service';
 
 @NgModule({
   imports: [
@@ -15,8 +19,10 @@ import { reducers } from './reducers/index';
     ReactiveFormsModule,
     RouterModule.forChild(profileRoutes),
     SharedModule,
-    StoreModule.forFeature('profile', reducers)
+    StoreModule.forFeature('profile', reducers),
+    EffectsModule.forFeature([ProfileEffects])
   ],
-  declarations: [ProfilePageComponent, ProfileFormComponent]
+  declarations: [ProfilePageComponent, ProfileFormComponent],
+  providers: [ProfileService, FileUploadService]
 })
 export class ProfileModule { }

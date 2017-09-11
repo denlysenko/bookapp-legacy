@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import * as fromProfile from '../../reducers';
+import * as Profile from '../../actions/profile';
 import * as fromAuth from '../../../auth/reducers'
 import { User } from '../../../auth/models/User';
 import { routeAnimation } from '../../../animations/route-animation';
+import { SaveProfilePayload } from '../../actions/profile';
 
 @Component({
   templateUrl: './profile-page.component.html',
@@ -25,5 +27,9 @@ export class ProfilePageComponent {
     this.success$ = store.select(fromProfile.selectSuccess);
     this.submitting$ = store.select(fromProfile.selectSubmitting);
     this.user$ = store.select(fromAuth.getUser);
+  }
+
+  onFormSubmit(event: SaveProfilePayload) {
+    this.store.dispatch(new Profile.SaveProfile(event));
   }
 }
