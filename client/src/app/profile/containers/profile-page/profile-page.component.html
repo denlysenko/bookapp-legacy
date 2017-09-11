@@ -1,0 +1,13 @@
+<section class="row">
+  <h3 class="col-md-12 text-center">Edit your profile</h3>
+  <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4">
+    <ba-alert *ngIf="error$ | async"
+              [text]="error$ | async"
+              [type]="'danger'"></ba-alert>
+    <ba-alert *ngIf="success$ | async"
+              [text]="'Profile changed successfuly'"
+              [type]="'success'"></ba-alert>
+    <ba-profile-form [user]="user$ | async"
+                     [isSumbitting]="submitting$ | async"></ba-profile-form>
+  </div>
+</section>
