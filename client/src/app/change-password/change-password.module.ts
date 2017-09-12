@@ -8,6 +8,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './reducers/index';
+import { EffectsModule } from '@ngrx/effects';
+import { ChangePasswordEffects } from './effects/change-password.effects';
+import { ChangePasswordService } from './services/change-password.service';
 
 @NgModule({
   imports: [
@@ -15,11 +18,13 @@ import { reducers } from './reducers/index';
     RouterModule.forChild(changePasswordRoutes),
     ReactiveFormsModule,
     SharedModule,
-    StoreModule.forFeature('changePassword', reducers)
+    StoreModule.forFeature('changePassword', reducers),
+    EffectsModule.forFeature([ChangePasswordEffects])
   ],
   declarations: [
     ChangePasswordPageComponent,
     ChangePasswordFormComponent
-  ]
+  ],
+  providers: [ChangePasswordService]
 })
 export class ChangePasswordModule { }

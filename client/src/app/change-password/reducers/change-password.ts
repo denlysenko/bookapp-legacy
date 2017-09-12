@@ -18,6 +18,7 @@ export function reducer(state = initialState, action: ChangePassword.Actions): S
       return {
         ...state,
         success: false,
+        error: null,
         submitting: true
       };
 

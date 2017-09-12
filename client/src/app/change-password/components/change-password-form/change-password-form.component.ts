@@ -31,6 +31,7 @@ export class ChangePasswordFormComponent implements OnInit {
   changePassword() {
     if (this.changePasswordForm.valid) {
       this.formSubmitted.emit(this.changePasswordForm.value);
+      this.changePasswordForm.markAsPristine();
     }
   }
 
