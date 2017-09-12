@@ -152,6 +152,10 @@ export const appRoutes: Routes = [
   {
     path: 'password-change',
     loadChildren: './change-password/change-password.module#ChangePasswordModule'
+  },
+  {
+    path: 'forgot',
+    loadChildren: './restore-password/restore-password.module#RestorePasswordModule'
   }
 ];
 
