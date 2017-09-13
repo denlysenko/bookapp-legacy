@@ -22,7 +22,7 @@ export class ForgotPasswordPageComponent {
     this.error$ = store.select(fromForgotPassword.getForgotError);
   }
 
-  onFormSubmit(event: string) {
-    this.store.dispatch(new RestorePassword.ForgotPassword(event));
+  onFormSubmit(event: { email: string }) {
+    this.store.dispatch(new RestorePassword.ForgotPassword(event.email));
   }
 }

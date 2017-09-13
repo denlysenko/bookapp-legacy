@@ -13,7 +13,7 @@ export class RestorePasswordService {
     @Inject(APP_CONFIG) private config: AppConfig
   ) { }
 
-  requestReset(body: { email: string }): Observable<string> {
+  requestReset(body: { email: string }): Observable<{ token: string }> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
 

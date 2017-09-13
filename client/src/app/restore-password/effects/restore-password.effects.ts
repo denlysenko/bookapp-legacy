@@ -15,7 +15,7 @@ export class RestorePasswordEffects {
     .map((action: RestorePassword.ForgotPassword) => action.payload)
     .switchMap(payload => {
       return this.restorePasswordService.requestReset({ email: payload })
-        .map(token => new RestorePassword.ForgotPasswordSuccess(token))
+        .map((response: { token: string }) => new RestorePassword.ForgotPasswordSuccess(response.token))
         .catch(err => Observable.of(new RestorePassword.ForgotPasswordFailure(err)));
     });
 
@@ -23,7 +23,7 @@ export class RestorePasswordEffects {
   forgotPasswordSuccess$ = this.actions$
     .ofType(RestorePassword.FORGOT_PASSWORD_SUCCESS)
     .map((action: RestorePassword.ForgotPasswordSuccess) => action.payload)
-    .map(token => this.router.navigate(['reset', token]));
+    .map(token => this.router.navigate(['forgot', token]));
 
   @Effect()
   resetPassword$ = this.actions$
@@ -33,7 +33,7 @@ export class RestorePasswordEffects {
       const { token, newPassword } = payload;
 
       return this.restorePasswordService.resetPassword(token, newPassword)
-        .map(token => new RestorePassword.ResetPasswordSuccess(token))
+        .map((response: { token: string }) => new RestorePassword.ResetPasswordSuccess(response.token))
         .catch(err => Observable.of(new RestorePassword.ResetPasswordFailure(err)));
     });
 
@@ -43,8 +43,8 @@ export class RestorePasswordEffects {
     .map((action: RestorePassword.ResetPasswordSuccess) => action.payload)
     .map(payload => {
       localStorage.setItem('access_token', payload);
-      new Auth.LoadLoggedUser();
-      this.router.navigate([''])
+      this.router.navigate(['']);
+      return new Auth.LoadLoggedUser();
     });
 
   constructor(

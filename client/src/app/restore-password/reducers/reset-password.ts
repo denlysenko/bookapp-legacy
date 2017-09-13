@@ -35,9 +35,11 @@ export function reducer(state = initialState, action: RestorePassword.Actions): 
         submitting: false,
         error: action.payload
       };
+
+    default:
+      return state;
   }
 }
 
 export const getSubmitting = (state: State) => state.submitting;
-export const getSuccess = (state: State) => state.success;
 export const getError = (state: State) => state.error;
