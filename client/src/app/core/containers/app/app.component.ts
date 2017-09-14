@@ -13,10 +13,12 @@ import { Logout } from '../../../auth/actions/auth';
 export class AppComponent {
   isLoggedIn$: Observable<boolean>;
   user$: Observable<User>;
+  isAdmin$: Observable<boolean>;
 
   constructor(private store: Store<fromAuth.State>) {
     this.isLoggedIn$ = store.select(fromAuth.getLoggedIn);
     this.user$ = store.select(fromAuth.getUser);
+    this.isAdmin$ = store.select(fromAuth.getIsAdmin);
   }
 
   signout() {

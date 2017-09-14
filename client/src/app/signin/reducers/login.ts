@@ -21,7 +21,8 @@ export function reducer(state = initialState, action: fromLogin.Actions): State 
     case fromLogin.LOGIN_SUCCESS:
       return {
         ...state,
-        submitting: false
+        submitting: false,
+        error: null
       };
 
     case fromLogin.LOGIN_FAILURE:

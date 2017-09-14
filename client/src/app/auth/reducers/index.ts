@@ -30,3 +30,8 @@ export const getLoggedIn = createSelector(
   selectAuthStatusState,
   fromAuth.getLoggedIn
 );
+
+export const getIsAdmin = createSelector(
+  selectAuthStatusState,
+  fromAuth.getIsAdmin
+);

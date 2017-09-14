@@ -8,4 +8,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class LayoutComponent {
   @Input() isLoggedIn: boolean;
+  @Input() isAdmin: boolean;
 }

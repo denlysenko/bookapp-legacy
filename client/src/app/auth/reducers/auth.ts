@@ -4,11 +4,13 @@ import * as fromAuth from '../actions/auth';
 export interface State {
   user: User | null;
   loggedIn: boolean;
+  isAdmin: boolean;
 }
 
 export const initialState: State = {
   user: null,
-  loggedIn: false
+  loggedIn: false,
+  isAdmin: false
 };
 
 export function reducer(state = initialState, action: fromAuth.Actions): State {
@@ -17,7 +19,8 @@ export function reducer(state = initialState, action: fromAuth.Actions): State {
       return {
         ...state,
         loggedIn: true,
-        user: action.payload
+        user: action.payload,
+        isAdmin: action.payload.roles.indexOf('admin') > -1
       };
 
     case fromAuth.LOGOUT_SUCCESS:
@@ -30,3 +33,4 @@ export function reducer(state = initialState, action: fromAuth.Actions): State {
 
 export const getUser = (state: State) => state.user;
 export const getLoggedIn = (state: State) => state.loggedIn;
+export const getIsAdmin = (state: State) => state.isAdmin;

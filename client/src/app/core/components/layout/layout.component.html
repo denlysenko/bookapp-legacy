@@ -1,7 +1,7 @@
 <section class="content">
   <section class="container tbl-row">
     <aside *ngIf="isLoggedIn" class="col-md-2">
-      <ba-sidebar></ba-sidebar>
+      <ba-sidebar [isAdmin]="isAdmin"></ba-sidebar>
     </aside>
     <main [ngClass]="{'col-md-10': isLoggedIn}">
       <router-outlet></router-outlet>

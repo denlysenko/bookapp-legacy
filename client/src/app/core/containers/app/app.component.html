@@ -1,5 +1,6 @@
 <ba-header [isLoggedIn]="isLoggedIn$ | async"
            [user]="user$ | async"
            (onSignout)="signout()"></ba-header>
-<ba-layout [isLoggedIn]="isLoggedIn$ | async"></ba-layout>
+<ba-layout [isLoggedIn]="isLoggedIn$ | async"
+           [isAdmin]="isAdmin$ | async"></ba-layout>
 <ba-footer></ba-footer>
