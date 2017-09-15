@@ -1,0 +1,8 @@
+<ba-spinner *ngIf="isLoading$ | async"></ba-spinner>
+<ba-book-list [page]="page"
+              [title]="title"
+              [books]="books$ | async"
+              [baseUrl]="baseUrl"
+              (sortChanged)="sort($event)"
+              (searchChanged)="search($event)"
+              (rated)="rate($event)"></ba-book-list>

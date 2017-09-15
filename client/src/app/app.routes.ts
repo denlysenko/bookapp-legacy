@@ -6,7 +6,7 @@
 // import { ChangePasswordComponent } from "./components/user/password/change-password/change-password.component";
 // import { AddBookComponent } from "./components/books/add/add-book.component";
 // import { BestBooksComponent } from "./components/books/best/best-books.component";
-// import { BrowseBooksComponent } from "./components/books/browse/browse-books.component";
+// import { BrowseBooksComponent } from "./components/books/browse/books.component";
 // import { FavouriteBooksComponent } from "./components/books/favourite/favourite-books.component";
 // import { MustreadBooksComponent } from "./components/books/mustread/mustread-books.component";
 // import { ReadingBookComponent } from "./components/books/reading/reading-book.component";
@@ -156,6 +156,10 @@ export const appRoutes: Routes = [
   {
     path: 'forgot',
     loadChildren: './restore-password/restore-password.module#RestorePasswordModule'
+  },
+  {
+    path: 'books',
+    loadChildren: './books/books.module#BooksModule'
   }
 ];
 
