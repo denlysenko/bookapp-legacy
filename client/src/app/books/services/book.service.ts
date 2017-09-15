@@ -50,7 +50,9 @@ export class BookService {
     let params: HttpParams = new HttpParams();
 
     for(let key in searchParams) {
-      params.set(key, searchParams[key]);
+      if (searchParams[key] !== '') {
+        params = params.set(key, searchParams[key]);
+      }
     }
 
     return this.http.get(`${this.config.baseUrl}/api/books`, { params })

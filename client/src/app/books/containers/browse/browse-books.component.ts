@@ -35,18 +35,15 @@ export class BrowseBooksComponent implements OnInit {
     this.baseUrl = config.baseUrl;
   }
 
-  // sort(event) {
-  //   this.sortBy = event;
-  //   this.isLoading = true;
-  //   this._bookService.getBooks({ paid: this.paid, sort: this.sortBy, search: this.searchTerm })
-  //     .finally(() => {
-  //       this.isLoading = false;
-  //     })
-  //     .subscribe(res => {
-  //       this.books = res;
-  //     });
-  // }
-  //
+  sort(event) {
+    this.store.dispatch(new Books.FetchBooks({
+      paid: this.paid,
+      sort: event,
+      search: ''
+    }));
+    // { paid: this.paid, sort: this.sortBy, search: this.searchTerm }
+  }
+
   // search(event) {
   //   this.searchTerm = event;
   //   this.searchStream.next(this.searchTerm);
