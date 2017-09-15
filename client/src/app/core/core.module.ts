@@ -10,13 +10,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthModule } from '../auth/auth.module';
 import { BsDropdownModule } from 'ngx-bootstrap';
+import { BookListComponent } from './components/book-list/book-list.component';
 
 const COMPONENTS = [
   AppComponent,
   LayoutComponent,
   HeaderComponent,
   FooterComponent,
-  SidebarComponent
+  SidebarComponent,
+  BookListComponent
 ];
 
 export function tokenGetter() {
