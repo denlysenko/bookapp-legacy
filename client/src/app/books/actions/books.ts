@@ -5,6 +5,7 @@ import { Book } from '../models/Book';
 export const FETCH_BOOKS = '[Books] Fetch Books';
 export const FETCH_BOOKS_SUCCESS = '[Books] Fetch Books Success';
 export const FETCH_BOOKS_FAILURE = '[Books] Fetch Books Failure';
+export const RATE_BOOK = '[Books] Rate Book';
 
 export class FetchBooks implements Action {
   readonly type = FETCH_BOOKS;
@@ -24,7 +25,14 @@ export class FetchBooksFailure implements Action {
   constructor(public payload: string) {}
 }
 
+export class RateBook implements Action {
+  readonly type = RATE_BOOK;
+
+  constructor(public payload: Book) { }
+}
+
 export type Actions =
   FetchBooks |
   FetchBooksSuccess |
-  FetchBooksFailure;
+  FetchBooksFailure |
+  RateBook;

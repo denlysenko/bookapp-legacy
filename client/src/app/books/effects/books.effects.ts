@@ -19,6 +19,12 @@ export class BooksEffects {
         .catch(err => Observable.of(new Books.FetchBooksFailure(handleError(err))));
     });
 
+  @Effect({ dispatch: false })
+  rateBook$ = this.actions$
+    .ofType(Books.RATE_BOOK)
+    .map((action: Books.RateBook) => action.payload)
+    .switchMap(book => this.bookService.rateBook(book._id, book.rating));
+
   constructor(
     private actions$: Actions,
     private bookService: BookService

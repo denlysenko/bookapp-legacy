@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from "@angular/core";
+import { Component, Inject, OnDestroy, OnInit } from "@angular/core";
 import { Location } from '@angular/common';
 import { Book } from "../../models/Book";
 import { routeAnimation } from '../../../animations/route-animation';
@@ -8,6 +8,8 @@ import * as Books from '../../actions/books';
 import { Store } from '@ngrx/store';
 import { APP_CONFIG } from '../../../config/app.config';
 import { AppConfig } from '../../../config/AppConfig';
+import { Subscription } from 'rxjs/Subscription';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   templateUrl: './browse-books.component.html',
@@ -17,13 +19,16 @@ import { AppConfig } from '../../../config/AppConfig';
   styles: [':host { position: absolute; width: 100%; height: 100%; }'],
   animations: [routeAnimation]
 })
-export class BrowseBooksComponent implements OnInit {
+export class BrowseBooksComponent implements OnInit, OnDestroy {
   isLoading$: Observable<boolean>;
   books$: Observable<Book[]>;
   page: string;
   paid: boolean;
   title: string;
   baseUrl: string;
+
+  private searchSubscription: Subscription;
+  private searchStream = new Subject<any>();
 
   constructor(
     private location: Location,
@@ -36,51 +41,32 @@ export class BrowseBooksComponent implements OnInit {
   }
 
   sort(event) {
-    this.store.dispatch(new Books.FetchBooks({
-      paid: this.paid,
-      sort: event,
-      search: ''
-    }));
-    // { paid: this.paid, sort: this.sortBy, search: this.searchTerm }
+    this.store.dispatch(new Books.FetchBooks({ sort: event }));
   }
 
-  // search(event) {
-  //   this.searchTerm = event;
-  //   this.searchStream.next(this.searchTerm);
-  // }
-  //
-  // rate(book: Book) {
-  //   this._bookService.rateBook(book._id, book.rating)
-  //     .switchMap(() => {
-  //       return this._historyService.addToHistory(`You rated ${book.title} by ${book.author}`);
-  //     })
-  //     .subscribe();
-  // }
-  //
+  search(event) {
+    this.searchStream.next(event);
+  }
+
+  rate(book: Book) {
+    this.store.dispatch(new Books.RateBook(book));
+  }
+
   ngOnInit() {
     this.page = this.location.path();
     this.paid = this.page.includes('buy');
     this.title = this.paid ? 'Browse Books To Buy' : 'Browse Free Books';
-    this.store.dispatch(new Books.FetchBooks({
-      paid: this.paid,
-      sort: '',
-      search: ''
-    }));
+    this.store.dispatch(new Books.FetchBooks({ paid: this.paid }));
 
-    // this.subscription = this.searchStream
-    //   .debounceTime(300)
-    //   .distinctUntilChanged()
-    //   .switchMap((searchStr: string) => {
-    //     this.isLoading = true;
-    //     return this._bookService.getBooks({ paid: this.paid, search: searchStr, sort: this.sortBy });
-    //   })
-    //   .subscribe(res => {
-    //     this.isLoading = false;
-    //     this.books = res;
-    //   });
+    this.searchSubscription = this.searchStream
+      .debounceTime(300)
+      .distinctUntilChanged()
+      .subscribe((searchStr: string) => {
+        this.store.dispatch(new Books.FetchBooks({ search: searchStr }));
+      });
   }
 
-  // ngOnDestroy() {
-  //   this.subscription.unsubscribe();
-  // }
+  ngOnDestroy() {
+    this.searchSubscription.unsubscribe();
+  }
 }

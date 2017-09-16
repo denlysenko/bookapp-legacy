@@ -1,5 +1,5 @@
 export interface BookFilter {
-  paid: boolean;
-  sort: string;
-  search: string;
+  paid?: boolean;
+  sort?: string;
+  search?: string;
 }

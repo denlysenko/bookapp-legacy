@@ -1,9 +1,11 @@
 import * as fromBooks from './books';
+import * as fromFilter from './filter';
 import * as fromRoot from '../../reducers';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 export interface BooksState {
   books: fromBooks.State;
+  filter: fromFilter.State;
 }
 
 export interface State extends fromRoot.State {
@@ -11,7 +13,8 @@ export interface State extends fromRoot.State {
 }
 
 export const reducers = {
-  books: fromBooks.reducer
+  books: fromBooks.reducer,
+  filter: fromFilter.reducer
 };
 
 export const getBooksState = createFeatureSelector<BooksState>('books');
@@ -21,9 +24,9 @@ export const getBooksEntitiesState = createSelector(
   (state: BooksState) => state.books
 );
 
-export const selectLoading = createSelector(
-  getBooksEntitiesState,
-  fromBooks.getLoading
+export const getBooksFilterState = createSelector(
+  getBooksState,
+  (state: BooksState) => state.filter
 );
 
 export const selectBooks = createSelector(
@@ -31,7 +34,12 @@ export const selectBooks = createSelector(
   fromBooks.getBooks
 );
 
+export const selectLoading = createSelector(
+  getBooksFilterState,
+  fromFilter.getLoading
+);
+
 export const selectError = createSelector(
-  getBooksEntitiesState,
-  fromBooks.getError
+  getBooksFilterState,
+  fromFilter.getError
 );
