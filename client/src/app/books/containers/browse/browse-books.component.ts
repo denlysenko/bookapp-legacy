@@ -10,6 +10,8 @@ import { APP_CONFIG } from '../../../config/app.config';
 import { AppConfig } from '../../../config/AppConfig';
 import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
+import { BookFilter } from '../../models/BookFilter';
+import * as _ from 'lodash';
 
 @Component({
   templateUrl: './browse-books.component.html',
@@ -29,6 +31,7 @@ export class BrowseBooksComponent implements OnInit, OnDestroy {
 
   private searchSubscription: Subscription;
   private searchStream = new Subject<any>();
+  private filter: BookFilter = {};
 
   constructor(
     private location: Location,
@@ -41,7 +44,7 @@ export class BrowseBooksComponent implements OnInit, OnDestroy {
   }
 
   sort(event) {
-    this.store.dispatch(new Books.FetchBooks({ sort: event }));
+    this.store.dispatch(new Books.FetchBooks(_.assignIn(this.filter, { sort: event })));
   }
 
   search(event) {
@@ -56,13 +59,13 @@ export class BrowseBooksComponent implements OnInit, OnDestroy {
     this.page = this.location.path();
     this.paid = this.page.includes('buy');
     this.title = this.paid ? 'Browse Books To Buy' : 'Browse Free Books';
-    this.store.dispatch(new Books.FetchBooks({ paid: this.paid }));
+    this.store.dispatch(new Books.FetchBooks(_.assignIn(this.filter, { paid: this.paid })));
 
     this.searchSubscription = this.searchStream
       .debounceTime(300)
       .distinctUntilChanged()
       .subscribe((searchStr: string) => {
-        this.store.dispatch(new Books.FetchBooks({ search: searchStr }));
+        this.store.dispatch(new Books.FetchBooks(_.assignIn(this.filter, { search: searchStr })));
       });
   }
 

@@ -13,6 +13,12 @@ export const initialState: State = {
 
 export function reducer(state = initialState, action: Books.Actions): State {
   switch (action.type) {
+    case Books.FETCH_BOOKS:
+      return {
+        ...state,
+        books: []
+      };
+
     case Books.FETCH_BOOKS_SUCCESS:
       return {
         ...state,

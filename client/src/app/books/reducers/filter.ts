@@ -18,8 +18,7 @@ export function reducer(state = initialState, action: Books.Actions): State {
     case Books.FETCH_BOOKS:
       return {
         ...state,
-        isLoading: true,
-        filter: action.payload
+        isLoading: true
       };
 
     case Books.FETCH_BOOKS_SUCCESS:

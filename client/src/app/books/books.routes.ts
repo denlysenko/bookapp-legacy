@@ -10,5 +10,9 @@ export const booksRoutes: Routes = [
   {
     path: 'browse',
     component: BrowseBooksComponent
+  },
+  {
+    path: 'buy',
+    component: BrowseBooksComponent
   }
 ];
