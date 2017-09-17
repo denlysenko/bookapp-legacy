@@ -20,11 +20,11 @@
        routerLinkActive="active">
       <i class="fa fa-shopping-cart"></i> Buy books
     </a>
-    <a [routerLink]="['favourite']"
+    <a [routerLink]="['books/favourite']"
        routerLinkActive="active">
       <i class="fa fa-star"></i> Favourite books
     </a>
-    <a [routerLink]="['wishlist']"
+    <a [routerLink]="['books/wishlist']"
        routerLinkActive="active">
       <i class="fa fa-th-list"></i> Wishlist
     </a>
@@ -34,9 +34,9 @@
     </a>
   </nav>
   <nav class="categories">
-    <a [routerLink]="['mustread']"
+    <a [routerLink]="['books/mustread']"
        routerLinkActive="active">Must read titles</a>
-    <a [routerLink]="['best']"
+    <a [routerLink]="['books/best']"
        routerLinkActive="active">List of the Best</a>
   </nav>
   <!--<div *ngIf="userHistory && userHistory.length" class="added-list">-->

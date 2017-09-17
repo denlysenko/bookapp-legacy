@@ -54,15 +54,15 @@
         <a *ngIf="!book.paid"
            routerLink="/browse/{{ book.url }}">
           <span class="title">{{ book.title }}
-            <i *ngIf="page === '/mustread'"
+            <i *ngIf="page === '/books/mustread'"
                class="fa fa-trash-o pull-right"
                aria-hidden="true"
                (click)="removeFromMustread($event, book)"></i>
-            <i *ngIf="page === '/favourite'"
+            <i *ngIf="page === '/books/favourite'"
                class="fa fa-trash-o pull-right"
                aria-hidden="true"
                (click)="removeFromFavourites($event, book)"></i>
-            <i *ngIf="page === '/wishlist'"
+            <i *ngIf="page === '/books/wishlist'"
                class="fa fa-trash-o pull-right"
                aria-hidden="true"
                (click)="removeFromWishlist($event, book)"></i>
@@ -71,15 +71,15 @@
         <a *ngIf="book.paid"
            routerLink="/buy/{{ book.url }}">
           <span class="title">{{ book.title }}
-            <i *ngIf="page === '/mustread'"
+            <i *ngIf="page === '/books/mustread'"
                class="fa fa-trash-o pull-right"
                aria-hidden="true"
                (click)="removeFromMustread($event, book)"></i>
-            <i *ngIf="page === '/favourite'"
+            <i *ngIf="page === '/books/favourite'"
                class="fa fa-trash-o pull-right"
                aria-hidden="true"
                (click)="removeFromFavourites($event, book)"></i>
-            <i *ngIf="page === '/wishlist'"
+            <i *ngIf="page === '/books/wishlist'"
                class="fa fa-trash-o pull-right"
                aria-hidden="true"
                (click)="removeFromWishlist($event, book)"></i>

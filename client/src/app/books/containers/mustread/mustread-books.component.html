@@ -1,0 +1,10 @@
+<ba-spinner *ngIf="isLoading$ | async"></ba-spinner>
+<ba-alert *ngIf="error$ | async"
+          [text]="error$ | async"
+          [type]="'danger'"></ba-alert>
+<ba-book-list [page]="page"
+              [title]="title"
+              [baseUrl]="baseUrl"
+              [books]="books$ | async"
+              (rated)="rate($event)"
+              (removedFromMustread)="removeFromMustread($event)"></ba-book-list>
