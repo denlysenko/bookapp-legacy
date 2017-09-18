@@ -41,18 +41,18 @@
       <div class="item">
         <div class="cover">
           <a *ngIf="!book.paid"
-             routerLink="/browse/{{ book.url }}">
+             routerLink="/books/browse/{{ book.url }}">
             <img [src]="baseUrl + '' + book.coverUrl"
                  alt="{{ book.title }}">
           </a>
           <a *ngIf="book.paid"
-             routerLink="/buy/{{ book.url }}">
+             routerLink="/books/buy/{{ book.url }}">
             <img [src]="baseUrl + '' + book.coverUrl"
                  alt="{{ book.title }}">
           </a>
         </div>
         <a *ngIf="!book.paid"
-           routerLink="/browse/{{ book.url }}">
+           routerLink="/books/browse/{{ book.url }}">
           <span class="title">{{ book.title }}
             <i *ngIf="page === '/books/mustread'"
                class="fa fa-trash-o pull-right"
@@ -69,7 +69,7 @@
           </span>
         </a>
         <a *ngIf="book.paid"
-           routerLink="/buy/{{ book.url }}">
+           routerLink="/books/buy/{{ book.url }}">
           <span class="title">{{ book.title }}
             <i *ngIf="page === '/books/mustread'"
                class="fa fa-trash-o pull-right"

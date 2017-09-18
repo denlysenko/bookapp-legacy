@@ -10,7 +10,7 @@ import { BrowseBooksComponent } from './containers/browse/browse-books.component
 import { BookService } from './services/book.service';
 import { SharedModule } from '../shared/shared.module';
 import { BookListComponent } from './components/book-list/book-list.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RatingModule } from 'ngx-bootstrap';
 import { FileUploadService } from '../services/fileUpload.service';
 import { FavouriteService } from './services/favourite.service';
@@ -24,11 +24,15 @@ import { MustreadService } from './services/mustread.service';
 import { MustreadEffects } from './effects/mustread.effects';
 import { BestBooksEffects } from './effects/best.effects';
 import { BestBooksComponent } from './containers/best/best-books.component';
+import { BookViewComponent } from './containers/book-view/book-view.component';
+import { BookDetailsComponent } from './components/book-details/book-details.component';
+import { BookEffects } from './effects/book.effects';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(booksRoutes),
     StoreModule.forFeature('books', reducers),
     EffectsModule.forFeature([
@@ -36,7 +40,8 @@ import { BestBooksComponent } from './containers/best/best-books.component';
       FavouritesEffects,
       WishlistEffects,
       MustreadEffects,
-      BestBooksEffects
+      BestBooksEffects,
+      BookEffects
     ]),
     SharedModule,
     RatingModule.forRoot()
@@ -47,7 +52,9 @@ import { BestBooksComponent } from './containers/best/best-books.component';
     FavouriteBooksComponent,
     WishlistBooksComponent,
     MustreadBooksComponent,
-    BestBooksComponent
+    BestBooksComponent,
+    BookViewComponent,
+    BookDetailsComponent
   ],
   providers: [
     BookService,

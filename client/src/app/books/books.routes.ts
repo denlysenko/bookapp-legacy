@@ -4,6 +4,7 @@ import { FavouriteBooksComponent } from './containers/favourite/favourite-books.
 import { WishlistBooksComponent } from './containers/wishlist/wishlist-books.component';
 import { MustreadBooksComponent } from './containers/mustread/mustread-books.component';
 import { BestBooksComponent } from './containers/best/best-books.component';
+import { BookViewComponent } from './containers/book-view/book-view.component';
 
 export const booksRoutes: Routes = [
   {
@@ -18,6 +19,14 @@ export const booksRoutes: Routes = [
   {
     path: 'buy',
     component: BrowseBooksComponent
+  },
+  {
+    path: 'browse/:author/:slug',
+    component: BookViewComponent
+  },
+  {
+    path: 'buy/:author/:slug',
+    component: BookViewComponent
   },
   {
     path: 'favourite',

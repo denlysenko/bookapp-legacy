@@ -66,7 +66,7 @@
   -webkit-transition: opacity, background-image 1s;
   -o-transition: opacity, background-image 1s;
   transition: opacity, background-image 1s;
-  background-image: url("../assets/img/type-card.png");
+  background-image: url("../../../../assets/img/type-card.png");
 }
 #typecard-icon.visa,
 #typecard-icon.mc,
@@ -83,14 +83,14 @@
 }
 #typecard-icon.visa,
 #typecard-icon.VISA {
-  background-image: url("../assets/img/type-visa.png");
+  background-image: url("/assets/img/type-visa.png");
 }
 #typecard-icon.mc,
 #typecard-icon.MASTERCARD,
 #typecard-icon.mastercard {
-  background-image: url("../assets/img/type-mc.png");
+  background-image: url("../../../../assets/img/type-mc.png");
 }
 #typecard-icon.maestro,
 #typecard-icon.MAESTRO {
-  background-image: url("../assets/img/type-maestro.png");
+  background-image: url("../../../../assets/img/type-maestro.png");
 }

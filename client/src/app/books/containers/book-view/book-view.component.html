@@ -1,0 +1,4 @@
+<ba-spinner *ngIf="isLoading$ | async"></ba-spinner>
+<ba-book-details [isAdmin]="isAdmin$ | async"
+                 [book]="book$ | async"
+                 [baseUrl]="baseUrl"></ba-book-details>
