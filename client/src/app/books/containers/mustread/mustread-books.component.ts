@@ -42,20 +42,9 @@ export class MustreadBooksComponent implements OnInit {
     this.store.dispatch(new Books.RateBook(book));
   }
 
-  // removeFromMustread(book: Book) {
-  //   this._mustreadService.removeFromMustread(book._id)
-  //     .switchMap(() => {
-  //       return this._historyService.addToHistory(`You removed ${book.title} by ${book.author} from Must Read Titles`);
-  //     })
-  //     .subscribe(
-  //       () => {
-  //         this.getMustread();
-  //       },
-  //       err => {
-  //         this.error = ErrorHandler.handleError(err.json());
-  //       }
-  //     );
-  // }
+  removeFromMustread(book: Book) {
+    this.store.dispatch(new Mustread.RemoveFromMustread(book._id));
+  }
 
   ngOnInit() {
     this.page = this._location.path();

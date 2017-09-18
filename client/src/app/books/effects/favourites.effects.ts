@@ -25,6 +25,16 @@ export class FavouritesEffects {
         .catch(err => Observable.of(new Favourites.AddToFavouriteFailure(err)));
     });
 
+  @Effect()
+  removeFromFavourites$ = this.actions$
+    .ofType(Favourites.REMOVE_FROM_FAVOURITE)
+    .map((action: Favourites.RemoveFromFavourite) => action.payload)
+    .switchMap(id => {
+      return this.favouriteService.removeFromFavourites(id)
+        .map(() => new Favourites.RemoveFromFavouriteSuccess(id))
+        .catch(err => Observable.of(new Favourites.RemoveFromFavouriteFailure(err)));
+    });
+
   constructor(
     private actions$: Actions,
     private favouriteService: FavouriteService

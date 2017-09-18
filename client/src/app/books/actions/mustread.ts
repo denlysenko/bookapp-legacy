@@ -51,6 +51,8 @@ export class RemoveFromMustread implements Action {
 
 export class RemoveFromMustreadSuccess implements Action {
   readonly type = REMOVE_FROM_MUSTREAD_SUCCESS;
+
+  constructor(public payload: string) { }
 }
 
 export class RemoveFromMustreadFailure implements Action {

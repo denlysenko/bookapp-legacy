@@ -60,6 +60,28 @@ export function reducer(state = initialState, action: Wishlist.Actions): State {
         error: action.payload
       };
 
+      case Wishlist.REMOVE_FROM_WISHLIST:
+      return {
+        ...state,
+        isLoading: true,
+        error: null,
+        success: null
+      };
+
+    case Wishlist.REMOVE_FROM_WISHLIST_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        books: state.books.filter(book => book._id !== action.payload)
+      };
+
+    case Wishlist.REMOVE_FROM_WISHLIST_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+
     default:
       return state;
   }

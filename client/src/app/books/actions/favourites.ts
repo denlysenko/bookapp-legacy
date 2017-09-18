@@ -7,6 +7,9 @@ export const FETCH_FAVOURITE_FAILURE = '[Books] Fetch Favourite Books Failure';
 export const ADD_TO_FAVOURITE = '[Books] Add To Favourite';
 export const ADD_TO_FAVOURITE_SUCCESS = '[Books] Add To Favourite Success';
 export const ADD_TO_FAVOURITE_FAILURE = '[Books] Add To Favourite Failure';
+export const REMOVE_FROM_FAVOURITE = '[Books] Remove From Favourite';
+export const REMOVE_FROM_FAVOURITE_SUCCESS = '[Books] Remove From Favourite Success';
+export const REMOVE_FROM_FAVOURITE_FAILURE = '[Books] Remove From Favourite Failure';
 
 export class FetchFavourite implements Action {
   readonly type = FETCH_FAVOURITE;
@@ -40,10 +43,31 @@ export class AddToFavouriteFailure implements Action {
   constructor(public payload: string) { }
 }
 
+export class RemoveFromFavourite implements Action {
+  readonly type = REMOVE_FROM_FAVOURITE;
+
+  constructor(public payload: string) { }
+}
+
+export class RemoveFromFavouriteSuccess implements Action {
+  readonly type = REMOVE_FROM_FAVOURITE_SUCCESS;
+
+  constructor(public payload: string) { }
+}
+
+export class RemoveFromFavouriteFailure implements Action {
+  readonly type = REMOVE_FROM_FAVOURITE_FAILURE;
+
+  constructor(public payload: string) { }
+}
+
 export type Actions =
   FetchFavourite |
   FetchFavouriteSuccess |
   FetchFavouriteFailure |
   AddToFavourite |
   AddToFavouriteSuccess |
-  AddToFavouriteFailure;
+  AddToFavouriteFailure |
+  RemoveFromFavourite |
+  RemoveFromFavouriteSuccess |
+  RemoveFromFavouriteFailure;

@@ -25,6 +25,16 @@ export class WishlistEffects {
         .catch(err => Observable.of(new Wishlist.AddToWishlistFailure(err)));
     });
 
+  @Effect()
+  removeFromWishlist$ = this.actions$
+    .ofType(Wishlist.REMOVE_FROM_WISHLIST)
+    .map((action: Wishlist.RemoveFromWishlist) => action.payload)
+    .switchMap(id => {
+      return this.wishlistService.removeFromWishlist(id)
+        .map(() => new Wishlist.RemoveFromWishlistSuccess(id))
+        .catch(err => Observable.of(new Wishlist.RemoveFromWishlistFailure(err)));
+    });
+
   constructor(
     private actions$: Actions,
     private wishlistService: WishlistService

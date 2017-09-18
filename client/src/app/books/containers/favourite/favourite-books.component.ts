@@ -43,20 +43,9 @@ export class FavouriteBooksComponent implements OnInit {
     this.store.dispatch(new Books.RateBook(book));
   }
 
-  // removeFromFavourites(book: Book) {
-  //   this._favouriteService.removeFromFavourites(book._id)
-  //     .switchMap(() => {
-  //       return this._historyService.addToHistory(`You removed ${book.title} by ${book.author} from Favourites`);
-  //     })
-  //     .subscribe(
-  //       () => {
-  //         this.getFavourites();
-  //       },
-  //       err => {
-  //         this.error = ErrorHandler.handleError(err.json());
-  //       }
-  //     );
-  // }
+  removeFromFavourites(book: Book) {
+    this.store.dispatch(new Favourites.RemoveFromFavourite(book._id));
+  }
 
   ngOnInit() {
     this.page = this._location.path();

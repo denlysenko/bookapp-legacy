@@ -25,6 +25,16 @@ export class MustreadEffects {
         .catch(err => Observable.of(new Mustread.AddToMustreadFailure(err)));
     });
 
+  @Effect()
+  removeFromMustread$ = this.actions$
+    .ofType(Mustread.REMOVE_FROM_MUSTREAD)
+    .map((action: Mustread.RemoveFromMustread) => action.payload)
+    .switchMap(id => {
+      return this.mustreadService.removeFromMustread(id)
+        .map(() => new Mustread.RemoveFromMustreadSuccess(id))
+        .catch(err => Observable.of(new Mustread.RemoveFromMustreadFailure(err)));
+    });
+
   constructor(
     private actions$: Actions,
     private mustreadService: MustreadService

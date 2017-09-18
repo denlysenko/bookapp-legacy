@@ -39,6 +39,28 @@ export function reducer(state = initialState, action: Mustread.Actions): State {
         books: []
       };
 
+    case Mustread.REMOVE_FROM_MUSTREAD:
+      return {
+        ...state,
+        isLoading: true,
+        error: null,
+        success: null
+      };
+
+    case Mustread.REMOVE_FROM_MUSTREAD_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        books: state.books.filter(book => book._id !== action.payload)
+      };
+
+    case Mustread.REMOVE_FROM_MUSTREAD_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+
     case Mustread.ADD_TO_MUSTREAD:
       return {
         ...state,

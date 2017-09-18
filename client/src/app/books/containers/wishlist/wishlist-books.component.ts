@@ -43,20 +43,9 @@ export class WishlistBooksComponent implements OnInit {
     this.store.dispatch(new Books.RateBook(book));
   }
 
-  // removeFromWishlist(book: Book) {
-  //   this._wishlistService.removeFromWishlist(book._id)
-  //     .switchMap(() => {
-  //       return this._historyService.addToHistory(`You removed ${book.title} by ${book.author} from Wishlist`);
-  //     })
-  //     .subscribe(
-  //       () => {
-  //         this.getWishlist();
-  //       },
-  //       err => {
-  //         this.error = ErrorHandler.handleError(err.json());
-  //       }
-  //     );
-  // }
+  removeFromWishlist(book: Book) {
+    this.store.dispatch(new Wishlist.RemoveFromWishlist(book._id));
+  }
 
   ngOnInit() {
     this.page = this._location.path();

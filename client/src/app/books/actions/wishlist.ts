@@ -7,6 +7,9 @@ export const FETCH_WISHLIST_FAILURE = '[Books] Fetch Wishlist Failure';
 export const ADD_TO_WISHLIST = '[Books] Add To Wishlist';
 export const ADD_TO_WISHLIST_SUCCESS = '[Books] Add To Wishlist Success';
 export const ADD_TO_WISHLIST_FAILURE = '[Books] Add To Wishlist Failure';
+export const REMOVE_FROM_WISHLIST = '[Books] Remove From Wishlist';
+export const REMOVE_FROM_WISHLIST_SUCCESS = '[Books] Remove From Wishlist Success';
+export const REMOVE_FROM_WISHLIST_FAILURE = '[Books] Remove From Wishlist Failure';
 
 export class FetchWishlist implements Action {
   readonly type = FETCH_WISHLIST;
@@ -40,10 +43,31 @@ export class AddToWishlistFailure implements Action {
   constructor(public payload: string) { }
 }
 
+export class RemoveFromWishlist implements Action {
+  readonly type = REMOVE_FROM_WISHLIST;
+
+  constructor(public payload: string) { }
+}
+
+export class RemoveFromWishlistSuccess implements Action {
+  readonly type = REMOVE_FROM_WISHLIST_SUCCESS;
+
+  constructor(public payload: string) { }
+}
+
+export class RemoveFromWishlistFailure implements Action {
+  readonly type = REMOVE_FROM_WISHLIST_FAILURE;
+
+  constructor(public payload: string) { }
+}
+
 export type Actions =
   FetchWishlist |
   FetchWishlistSuccess |
   FetchWishlistFailure |
   AddToWishlist |
   AddToWishlistSuccess |
-  AddToWishlistFailure;
+  AddToWishlistFailure |
+  RemoveFromWishlist |
+  RemoveFromWishlistSuccess |
+  RemoveFromWishlistFailure;
