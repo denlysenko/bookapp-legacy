@@ -3,14 +3,14 @@ import * as Favourites from '../actions/favourites';
 
 export interface State {
   isLoading: boolean;
-  success: boolean;
+  success: string | null;
   error: string | null;
   books: Book[];
 }
 
 export const initialState: State = {
   isLoading: false,
-  success: false,
+  success: null,
   error: null,
   books: []
 };
@@ -50,7 +50,7 @@ export function reducer(state = initialState, action: Favourites.Actions): State
       return {
         ...state,
         isLoading: false,
-        success: true
+        success: 'Successfully added to Favourite Books'
       };
 
     case Favourites.ADD_TO_FAVOURITE_FAILURE:
@@ -68,3 +68,4 @@ export function reducer(state = initialState, action: Favourites.Actions): State
 export const getFavouriteBooks = (state: State) => state.books;
 export const getLoading = (state: State) => state.isLoading;
 export const getError = (state: State) => state.error;
+export const getSuccess = (state: State) => state.success;

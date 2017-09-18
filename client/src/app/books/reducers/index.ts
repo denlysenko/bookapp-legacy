@@ -99,6 +99,11 @@ export const selectFavouriteError = createSelector(
   fromFavourites.getError
 );
 
+export const selectFavouriteSuccess = createSelector(
+  getFavouritesState,
+  fromFavourites.getSuccess
+);
+
 export const selectWishlistBooks = createSelector(
   getWishlistState,
   fromWishlist.getWishlist
@@ -114,6 +119,11 @@ export const selectWishlistError = createSelector(
   fromWishlist.getError
 );
 
+export const selectWishlistSuccess = createSelector(
+  getWishlistState,
+  fromWishlist.getSuccess
+);
+
 export const selectMustreadBooks = createSelector(
   getMustreadState,
   fromMustread.getBooks
@@ -127,6 +137,11 @@ export const selectMustreadLoading = createSelector(
 export const selectMustreadError = createSelector(
   getMustreadState,
   fromMustread.getError
+);
+
+export const selectMustreadSuccess = createSelector(
+  getMustreadState,
+  fromMustread.getSuccess
 );
 
 export const selectBestBooks = createSelector(

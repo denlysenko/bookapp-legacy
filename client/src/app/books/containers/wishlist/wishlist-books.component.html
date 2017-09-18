@@ -4,6 +4,7 @@
           [type]="'danger'"></ba-alert>
 <ba-book-list [page]="page"
               [title]="title"
+              [baseUrl]="baseUrl"
               [books]="books$ | async"
               (rated)="rate($event)"
               (removedFromWishlist)="removeFromWishlist($event)"></ba-book-list>

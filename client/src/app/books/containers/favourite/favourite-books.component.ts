@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { routeAnimation } from '../../../animations/route-animation';
 import { Book } from '../../models/Book';
@@ -7,6 +7,8 @@ import * as fromFavourites from '../../reducers';
 import * as Favourites from '../../actions/favourites';
 import * as Books from '../../actions/books';
 import { Store } from '@ngrx/store';
+import { APP_CONFIG } from '../../../config/app.config';
+import { AppConfig } from '../../../config/AppConfig';
 
 @Component({
   templateUrl: './favourite-books.component.html',
@@ -18,6 +20,7 @@ import { Store } from '@ngrx/store';
 })
 export class FavouriteBooksComponent implements OnInit {
   title = 'Favourite Books';
+  baseUrl: string;
 
   books$: Observable<Book[]>;
   isLoading$: Observable<boolean>;
@@ -27,11 +30,13 @@ export class FavouriteBooksComponent implements OnInit {
 
   constructor(
     private store: Store<fromFavourites.State>,
-    private _location: Location
+    private _location: Location,
+    @Inject(APP_CONFIG) private config: AppConfig
   ) {
     this.books$ = store.select(fromFavourites.selectFavouriteBooks);
     this.isLoading$ = store.select(fromFavourites.selectFavouriteLoading);
     this.error$ = store.select(fromFavourites.selectFavouriteError);
+    this.baseUrl = config.baseUrl;
   }
 
   rate(book: Book) {

@@ -11,8 +11,18 @@ export class FavouritesEffects {
     .ofType(Favourites.FETCH_FAVOURITE)
     .switchMap(() => {
       return this.favouriteService.getFavourites()
-        .map(books => new Favourites.FetchFavouriteSuccess(books))
+        .map(response => new Favourites.FetchFavouriteSuccess(response.books))
         .catch(err => Observable.of(new Favourites.FetchFavouriteFailure(err)));
+    });
+
+  @Effect()
+  addToFavourites$ = this.actions$
+    .ofType(Favourites.ADD_TO_FAVOURITE)
+    .map((action: Favourites.AddToFavourite) => action.payload)
+    .switchMap(id => {
+      return this.favouriteService.addToFavourites(id)
+        .map(() => new Favourites.AddToFavouriteSuccess())
+        .catch(err => Observable.of(new Favourites.AddToFavouriteFailure(err)));
     });
 
   constructor(

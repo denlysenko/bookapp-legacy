@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Book } from '../../models/Book';
 import { Location } from '@angular/common';
 import { routeAnimation } from '../../../animations/route-animation';
@@ -7,6 +7,8 @@ import * as fromWishlist from '../../reducers';
 import * as Wishlist from '../../actions/wishlist';
 import * as Books from '../../actions/books';
 import { Store } from '@ngrx/store';
+import { APP_CONFIG } from '../../../config/app.config';
+import { AppConfig } from '../../../config/AppConfig';
 
 @Component({
   templateUrl: './wishlist-books.component.html',
@@ -18,6 +20,7 @@ import { Store } from '@ngrx/store';
 })
 export class WishlistBooksComponent implements OnInit {
   title = 'Wishlist';
+  baseUrl: string;
 
   books$: Observable<Book[]>;
   isLoading$: Observable<boolean>;
@@ -27,11 +30,13 @@ export class WishlistBooksComponent implements OnInit {
 
   constructor(
     private _location: Location,
-    private store: Store<fromWishlist.State>
+    private store: Store<fromWishlist.State>,
+    @Inject(APP_CONFIG) private config: AppConfig
   ) {
     this.books$ = store.select(fromWishlist.selectWishlistBooks);
     this.isLoading$ = store.select(fromWishlist.selectWishlistLoading);
     this.error$ = store.select(fromWishlist.selectWishlistError);
+    this.baseUrl = config.baseUrl;
   }
 
   rate(book: Book) {

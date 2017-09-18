@@ -3,14 +3,14 @@ import * as Wishlist from '../actions/wishlist';
 
 export interface State {
   isLoading: boolean;
-  success: boolean;
+  success: string | null;
   error: string | null;
   books: Book[];
 }
 
 export const initialState: State = {
   isLoading: false,
-  success: false,
+  success: null,
   error: null,
   books: []
 };
@@ -50,7 +50,7 @@ export function reducer(state = initialState, action: Wishlist.Actions): State {
       return {
         ...state,
         isLoading: false,
-        success: true
+        success: 'Successfully added to Wishlist'
       };
 
     case Wishlist.ADD_TO_WISHLIST_FAILURE:
@@ -68,3 +68,4 @@ export function reducer(state = initialState, action: Wishlist.Actions): State {
 export const getWishlist = (state: State) => state.books;
 export const getLoading = (state: State) => state.isLoading;
 export const getError = (state: State) => state.error;
+export const getSuccess = (state: State) => state.success;

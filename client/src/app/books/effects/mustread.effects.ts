@@ -15,6 +15,16 @@ export class MustreadEffects {
         .catch(err => Observable.of(new Mustread.FetchMustreadBooksFailure(err)));
     });
 
+  @Effect()
+  addToMustread$ = this.actions$
+    .ofType(Mustread.ADD_TO_MUSTREAD)
+    .map((action: Mustread.AddToMustread) => action.payload)
+    .switchMap(id => {
+      return this.mustreadService.addToMustread(id)
+        .map(() => new Mustread.AddToMustreadSuccess())
+        .catch(err => Observable.of(new Mustread.AddToMustreadFailure(err)));
+    });
+
   constructor(
     private actions$: Actions,
     private mustreadService: MustreadService
