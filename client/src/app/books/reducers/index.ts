@@ -6,6 +6,7 @@ import * as fromMustread from './mustread';
 import * as fromBest from './best';
 import * as fromRoot from '../../reducers';
 import * as fromBook from './book';
+import * as fromComments from './comments';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 export interface BooksState {
@@ -16,6 +17,7 @@ export interface BooksState {
   mustread: fromMustread.State;
   best: fromBest.State;
   book: fromBook.State;
+  comments: fromComments.State;
 }
 
 export interface State extends fromRoot.State {
@@ -29,7 +31,8 @@ export const reducers = {
   wishlist: fromWishlist.reducer,
   mustread: fromMustread.reducer,
   best: fromBest.reducer,
-  book: fromBook.reducer
+  book: fromBook.reducer,
+  comments: fromComments.reducer
 };
 
 export const getBooksState = createFeatureSelector<BooksState>('books');
@@ -67,6 +70,11 @@ export const getBestState = createSelector(
 export const getBookState = createSelector(
   getBooksState,
   (state: BooksState) => state.book
+);
+
+export const getCommentsState = createSelector(
+  getBooksState,
+  (state: BooksState) => state.comments
 );
 
 export const selectBooks = createSelector(
@@ -172,4 +180,19 @@ export const selectBookLoading = createSelector(
 export const selectBookError = createSelector(
   getBookState,
   fromBook.getError
+);
+
+export const selectComments = createSelector(
+  getCommentsState,
+  fromComments.getComments
+);
+
+export const selectCommentsSubmitting = createSelector(
+  getCommentsState,
+  fromComments.getSubmitting
+);
+
+export const selectCommentsError = createSelector(
+  getCommentsState,
+  fromComments.getError
 );

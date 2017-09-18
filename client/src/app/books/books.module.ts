@@ -27,6 +27,9 @@ import { BestBooksComponent } from './containers/best/best-books.component';
 import { BookViewComponent } from './containers/book-view/book-view.component';
 import { BookDetailsComponent } from './components/book-details/book-details.component';
 import { BookEffects } from './effects/book.effects';
+import { CommentService } from './services/comment.service';
+import { CommentsEffects } from './effects/comments.effects';
+import { CommentsComponent } from './components/comments/comments.component';
 
 @NgModule({
   imports: [
@@ -41,7 +44,8 @@ import { BookEffects } from './effects/book.effects';
       WishlistEffects,
       MustreadEffects,
       BestBooksEffects,
-      BookEffects
+      BookEffects,
+      CommentsEffects
     ]),
     SharedModule,
     RatingModule.forRoot()
@@ -54,14 +58,16 @@ import { BookEffects } from './effects/book.effects';
     MustreadBooksComponent,
     BestBooksComponent,
     BookViewComponent,
-    BookDetailsComponent
+    BookDetailsComponent,
+    CommentsComponent
   ],
   providers: [
     BookService,
     FileUploadService,
     FavouriteService,
     WishlistService,
-    MustreadService
+    MustreadService,
+    CommentService
   ]
 })
 export class BooksModule { }

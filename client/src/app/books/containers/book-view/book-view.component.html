@@ -1,9 +1,13 @@
 <ba-spinner *ngIf="isLoading$ | async"></ba-spinner>
 <ba-book-details [isAdmin]="isAdmin$ | async"
-                 [book]="book$ | async"
+                 [book]="book"
                  [baseUrl]="baseUrl"
                  [success]="successMsg"
                  [error]="errorMsg"
                  (addedToMustread)="onAddToMustread($event)"
                  (addedToFavourites)="onAddToFavourites($event)"
                  (addedToWishlist)="onAddToWishlist($event)"></ba-book-details>
+<ba-comments [comments]="comments$ | async"
+             [user]="user$ | async"
+             [isSubmitting]="commentSubmitting$ | async"
+             (addedComment)="onCommentAdd($event)"></ba-comments>

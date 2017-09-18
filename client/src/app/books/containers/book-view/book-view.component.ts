@@ -5,6 +5,7 @@ import * as Books from '../../actions/book';
 import * as Mustread from '../../actions/mustread';
 import * as Favourite from '../../actions/favourites';
 import * as Wishlist from '../../actions/wishlist';
+import * as Comments from '../../actions/comments';
 import * as fromBook from '../../reducers';
 import * as fromAuth from '../../../auth/reducers';
 import { Store } from '@ngrx/store';
@@ -13,6 +14,8 @@ import { Book } from '../../models/Book';
 import { APP_CONFIG } from '../../../config/app.config';
 import { AppConfig } from '../../../config/AppConfig';
 import { Subscription } from 'rxjs/Subscription';
+import { IComment } from '../../models/Comment';
+import { User } from '../../../auth/models/User';
 
 @Component({
   templateUrl: './book-view.component.html',
@@ -25,7 +28,10 @@ import { Subscription } from 'rxjs/Subscription';
 export class BookViewComponent implements OnInit, OnDestroy {
   isLoading$: Observable<boolean>;
   isAdmin$: Observable<boolean>;
-  book$: Observable<Book>;
+  commentSubmitting$: Observable<boolean>;
+  book: Book;
+  comments$: Observable<IComment>;
+  user$: Observable<User>;
   baseUrl: string;
   successMsg: string;
   errorMsg: string;
@@ -36,6 +42,7 @@ export class BookViewComponent implements OnInit, OnDestroy {
   private favouriteErrorSubscription: Subscription;
   private wishlistSuccessSubscription: Subscription;
   private wishlistErrorSubscription: Subscription;
+  private bookSubscription: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -44,14 +51,24 @@ export class BookViewComponent implements OnInit, OnDestroy {
     private ref: ChangeDetectorRef
   ) {
     this.isAdmin$ = store.select(fromAuth.getIsAdmin);
-    this.book$ = store.select(fromBook.selectBook);
     this.isLoading$ = store.select(fromBook.selectBookLoading);
+    this.comments$ = store.select(fromBook.selectComments);
+    this.commentSubmitting$ = store.select(fromBook.selectCommentsSubmitting);
+    this.user$ = store.select(fromAuth.getUser);
     this.baseUrl = config.baseUrl;
   }
 
   ngOnInit() {
     const slug = this.route.snapshot.params['slug'];
     this.store.dispatch(new Books.FetchBook(slug));
+
+    this.bookSubscription = this.store.select(fromBook.selectBook)
+      .subscribe(book => {
+        if (book) {
+          this.book = book;
+          this.store.dispatch(new Comments.FetchComments(this.book._id));
+        }
+      });
 
     this.mustreadSuccessSubscription = this.store.select(fromBook.selectMustreadSuccess)
       .subscribe(msg => {
@@ -114,6 +131,10 @@ export class BookViewComponent implements OnInit, OnDestroy {
     if (this.wishlistErrorSubscription) {
       this.wishlistErrorSubscription.unsubscribe();
     }
+
+    if (this.bookSubscription) {
+      this.bookSubscription.unsubscribe();
+    }
   }
 
   onAddToMustread(event: string) {
@@ -126,5 +147,9 @@ export class BookViewComponent implements OnInit, OnDestroy {
 
   onAddToWishlist(event: string) {
     this.store.dispatch(new Wishlist.AddToWishlist(event));
+  }
+
+  onCommentAdd(event: any) {
+    this.store.dispatch(new Comments.AddComment(Object.assign(event, { bookId: this.book._id })));
   }
 }
